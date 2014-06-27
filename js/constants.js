@@ -1,8 +1,6 @@
 define(['functions'], function(f){
     var c = {
         size: 50,
-        center: {x: 200, y: 200},
-
         symmetries: [
             [0, 27, 30],
             [1, 31, 23],
@@ -51,6 +49,13 @@ define(['functions'], function(f){
 
     };
 
+    var center = c.size/4 + (c.size*Math.sqrt(3)/2)*4;
+    c.center = {
+        x: center,
+        y: center
+    };
+
+
     c.points = [];
     c.points[18] = c.center;
 
@@ -68,6 +73,9 @@ define(['functions'], function(f){
         memo[s[0]] = _.without(s, s[0]);
         return memo;
     }, {});
+
+
+
 
     return c;
 });
