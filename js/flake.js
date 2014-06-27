@@ -49,8 +49,14 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
 
         var points = [];
 
+        var localColors = [];
         function color(){
-            return f.random(c.colors);
+            if (localColors.length == 0) {
+                localColors = c.colors.slice(0);
+            }
+            var col = f.random(localColors);
+            localColors = _.without(localColors, col);
+            return col;
         }
 
         function intersect(bob, bobs){
@@ -95,7 +101,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
 
         var bobs = [];
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < rnd.nextRange(3,5); i++) {
             do {
                 var sc = f.random(startPoints);
                 var fc = f.random(startPoints);
@@ -115,12 +121,9 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
 
 
         }
-
         rawSvg.textContent = snap.toString();
 
-
-
-
 //        render.renderPoints(snap);
+
     }
 });
