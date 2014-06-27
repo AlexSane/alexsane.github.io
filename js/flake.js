@@ -1,7 +1,6 @@
 require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeSvg'], function(_, Snap, render, c, f, RND, makeSvg){
 
     var input = document.getElementById('seed');
-    var rawSvg = document.getElementById('raw_svg');
     var download = document.getElementById('download');
 
     input.value = parseInt(window.location.hash.replace('#', ''), 10) || 0;
@@ -81,7 +80,6 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
         }
 
         var textContent = snap.toString();
-        rawSvg.textContent = textContent;
 
         download.href = makeSvg(textContent);
         download.setAttribute('download', 'logo_' + seed + '.svg');

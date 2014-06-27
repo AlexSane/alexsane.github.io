@@ -1,6 +1,6 @@
 define(['functions'], function(f){
     var c = {
-        size: 50,
+        size: 45,
         symmetries: [
             [0, 27, 30],
             [1, 31, 23],

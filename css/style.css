@@ -1,8 +1,5 @@
-.paper, .paper > svg, textarea {
-    width: 400px;
-    height: 400px;
+.paper, .paper > svg {
+    width: 100%;
+    height: 100%;
     display: block;
-}
-.paper, textarea {
-    float: left;
 }
