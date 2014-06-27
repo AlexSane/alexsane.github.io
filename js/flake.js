@@ -1,6 +1,7 @@
 require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], function(_, Snap, render, c,f, RND){
 
     var input = document.getElementById('seed');
+    var rawSvg = document.getElementById('raw_svg');
 
     input.value = parseInt(window.location.hash.replace('#',''),10)||0;
 
@@ -112,8 +113,13 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
             render.renderBob(snap, symmetryGroups[sc][1], symmetryGroups[fc][1], color());
 
 
+
         }
-        console.log(bobs);
+
+        rawSvg.textContent = snap.toString();
+
+
+
 
 //        render.renderPoints(snap);
     }
