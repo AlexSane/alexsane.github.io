@@ -36,7 +36,7 @@ define(['functions'], function(f){
             }, this);
         },
 
-        colors:[
+        colors: [
             '#f0c500',
             '#e48b21',
             '#008bb9',
@@ -63,6 +63,11 @@ define(['functions'], function(f){
             c.points[c.hexes[c.centerPoints[i]][j]] = localHex[j];
         }
     }
+
+    c.symmetryGroups = _.reduce(c.symmetries, function(memo, s){
+        memo[s[0]] = _.without(s, s[0]);
+        return memo;
+    }, {});
 
     return c;
 });
