@@ -75,9 +75,6 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
                 var oldColor = Snap.getRGB(oldBob.color);
                 var newColor = Snap.getRGB(newBob.color);
 
-//                var oldHsb = Snap.rgb2hsb(oldColor.r, oldColor.g, oldColor.b);
-  //              var newHsb = Snap.rgb2hsb(newColor.r, newColor.g, newColor.b);
-
                 Snap.animate([oldColor.r, oldColor.g, oldColor.b], [newColor.r, newColor.g, newColor.b], function(v){
 
                     var rgb = Snap.rgb(v[0],v[1],v[2]);
@@ -135,10 +132,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
                 }
             }
 
-            var head = localBobs.slice(0,2);
-            var tail = localBobs.slice(2);
-
-            return tail.concat(head);
+            return _.shuffle(localBobs);
 
 
         }
