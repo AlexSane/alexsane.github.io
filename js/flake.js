@@ -1,27 +1,28 @@
-require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], function(_, Snap, render, c,f, RND){
+require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeSvg'], function (_, Snap, render, c, f, RND, makeSvg) {
 
     var input = document.getElementById('seed');
     var rawSvg = document.getElementById('raw_svg');
+    var download = document.getElementById('download');
 
-    input.value = parseInt(window.location.hash.replace('#',''),10)||0;
+    input.value = parseInt(window.location.hash.replace('#', ''), 10) || 0;
 
     document.getElementById('random').addEventListener('click',function(e){
         input.value = parseInt(Math.random()*10000000);
         window.location.hash='#'+input.value;
     });
 
-    input.addEventListener('input', function(e){
-        window.location.hash='#'+input.value;
+    input.addEventListener('input', function (e) {
+        window.location.hash = '#' + input.value;
     });
 
-    window.addEventListener('hashchange', function(){
-        input.value = parseInt(window.location.hash.replace('#',''),10)||0;
+    window.addEventListener('hashchange', function () {
+        input.value = parseInt(window.location.hash.replace('#', ''), 10) || 0;
         drawLogo();
     });
 
     drawLogo();
 
-    function drawLogo(){
+    function drawLogo() {
         var seed = input.value || 0;
         window.rnd = new RND(seed);
 
@@ -34,14 +35,14 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
         //render.renderBob(snap, 11, 0, c.colors[1]);
 
 
-        var startPoints = c.symmetries.map(function(s){
+        var startPoints = c.symmetries.map(function (s) {
             return s[0];
         });
 
 
         //[[0,2,3]] => {0:[2,3]}
 
-        var symmetryGroups = _.reduce(c.symmetries, function(memo, s){
+        var symmetryGroups = _.reduce(c.symmetries, function (memo, s) {
             memo[s[0]] = _.without(s, s[0]);
             return memo;
         }, {});
@@ -59,8 +60,8 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
             return col;
         }
 
-        function intersect(bob, bobs){
-            return _.any(bobs, function(anotherBob){
+        function intersect(bob, bobs) {
+            return _.any(bobs, function (anotherBob) {
 
 
                 var x1, y1, x2, y2; // первый отрезок
@@ -119,11 +120,17 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
             render.renderBob(snap, symmetryGroups[sc][1], symmetryGroups[fc][1], color());
 
 
-
         }
-        rawSvg.textContent = snap.toString();
+
+        var textContent = snap.toString();
+        rawSvg.textContent = textContent;
+
+        download.href = makeSvg(textContent);
+        download.setAttribute('download', 'logo_' + seed + '.svg');
+
 
 //        render.renderPoints(snap);
 
     }
+
 });
