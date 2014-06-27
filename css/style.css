@@ -1,0 +1,8 @@
+.paper, .paper > svg, textarea {
+    width: 400px;
+    height: 400px;
+    display: block;
+}
+.paper, textarea {
+    float: left;
+}
