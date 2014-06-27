@@ -101,7 +101,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
 
         var bobs = [];
 
-        for (var i = 0; i < rnd.nextRange(3,5); i++) {
+        for (var i = 0; i < rnd.nextRange(2,6); i++) {
             do {
                 var sc = f.random(startPoints);
                 var fc = f.random(startPoints);
