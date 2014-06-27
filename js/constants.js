@@ -70,7 +70,7 @@ define(['functions'], function(f){
     }
 
     c.symmetryGroups = _.reduce(c.symmetries, function(memo, s){
-        memo[s[0]] = _.without(s, s[0]);
+        memo[s[0]] = s;
         return memo;
     }, {});
 
