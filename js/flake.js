@@ -115,7 +115,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
             var localBobs = [];
 
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 3; i++) {
                 do {
                     var sc = f.random(startPoints);
                     var fc = f.random(startPoints);
