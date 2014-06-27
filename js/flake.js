@@ -6,7 +6,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], funct
     input.value = parseInt(window.location.hash.replace('#',''),10)||0;
 
     document.getElementById('random').addEventListener('click',function(e){
-        input.value = parseInt(Math.random()*100000);
+        input.value = parseInt(Math.random()*10000000);
         window.location.hash='#'+input.value;
     });
 
