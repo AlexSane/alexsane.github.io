@@ -35,7 +35,7 @@ define(['Underscore', 'constants'], function(_, c){
 
 
         random: function(arr){
-            return arr[parseInt(Math.random()*arr.length)];
+            return window.rnd.choice(arr);
         }
 
 
