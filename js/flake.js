@@ -1,4 +1,4 @@
-require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'RND'], function(_, Snap, render, c,f, RND){
+require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd'], function(_, Snap, render, c,f, RND){
 
     var input = document.getElementById('seed');
 
