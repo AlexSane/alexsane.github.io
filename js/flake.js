@@ -72,6 +72,22 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
                 }, 500, callback);
 
 
+                var oldColor = Snap.getRGB(oldBob.color);
+                var newColor = Snap.getRGB(newBob.color);
+
+//                var oldHsb = Snap.rgb2hsb(oldColor.r, oldColor.g, oldColor.b);
+  //              var newHsb = Snap.rgb2hsb(newColor.r, newColor.g, newColor.b);
+
+                Snap.animate([oldColor.r, oldColor.g, oldColor.b], [newColor.r, newColor.g, newColor.b], function(v){
+
+                    var rgb = Snap.rgb(v[0],v[1],v[2]);
+
+                    oldBob.svg.attr({
+                       stroke:rgb
+                    });
+
+                },500);
+
 
             });
         }
