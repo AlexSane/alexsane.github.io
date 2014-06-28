@@ -1,5 +1,4 @@
 require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeSvg'], function(_, Snap, render, c, f, RND, makeSvg){
-
     var snap = Snap("#flake");
     var bobs = []; // [{s,f,color, bob}]
     render.renderSnowflake(snap);
@@ -13,10 +12,12 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
     input.value = parseInt(window.location.hash.replace('#', ''), 10) || 0;
 
-    document.getElementById('random').addEventListener('click', function(e){
+    var randomRefresh = function () {
         input.value = parseInt(Math.random() * 10000000);
         window.location.hash = '#' + input.value;
-    });
+    };
+    document.getElementById('random').addEventListener('click', randomRefresh);
+    document.querySelectorAll('.paper')[0].addEventListener('touchend', randomRefresh) ;
 
     input.addEventListener('input', function(e){
         window.location.hash = '#' + input.value;
