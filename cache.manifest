@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 4
+# rev 5
 CACHE:
-https://cdn.jsdelivr.net/requirejs/2.1.14/require.min.js
+deploy/require.js
 deploy/build.js
 deploy/style.css
 NETWORK:

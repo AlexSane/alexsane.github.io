@@ -8,7 +8,11 @@ gulp.task('minify-css', function() {
         .pipe(minifyCSS())
         .pipe(gulp.dest('./deploy/'))
 });
-
+gulp.task('require', function(){
+    gulp.src('./js/vendor/requirejs/require.js')
+        .pipe(uglify({preserveComments:'some'}))
+        .pipe(gulp.dest('./deploy/'))
+});
 gulp.task('requirejsBuild', function () {
     rjs({
         baseUrl: 'js',
@@ -26,7 +30,7 @@ gulp.task('requirejsBuild', function () {
                 exports: 'Snap'
             }
         }
-    }).pipe(uglify({outSourceMap: true,preserveComments:'some'}))
+    }).pipe(uglify({preserveComments:'some'}))
         .pipe(gulp.dest('./deploy/')); // pipe it to the output DIR
 });
 
@@ -41,4 +45,4 @@ gulp.task('requirejsBuild', function () {
  });*/
 
 
-gulp.task('default', ['requirejsBuild','minify-css']);
+gulp.task('default', ['requirejsBuild','minify-css','require']);
