@@ -1,0 +1,10 @@
+{
+    "name": "targetprocess.icon",
+    "version": "0.0.1",
+    "dependencies": {
+        "underscore": "1.6.0",
+        "snap.svg": "0.3.0",
+        "requirejs": "2.1.14"
+    }
+
+}

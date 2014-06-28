@@ -1,8 +1,8 @@
 require.config({
     baseUrl: 'js',
     paths: {
-        Underscore: 'https://cdn.jsdelivr.net/underscorejs/1.6.0/underscore-min',
-        Snap: 'https://cdn.jsdelivr.net/snap.svg/0.3.0/snap.svg'
+        Underscore: 'vendor/underscore/underscore',
+        Snap: 'vendor/snap.svg/dist/snap.svg'
     },
     shim: {
         Underscore: {

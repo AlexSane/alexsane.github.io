@@ -1,0 +1,44 @@
+var gulp = require('gulp'),
+    rjs = require('gulp-requirejs'),
+    uglify = require('gulp-uglify'),
+    minifyCSS = require('gulp-minify-css');
+
+gulp.task('minify-css', function() {
+    gulp.src('./css/style.css')
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./deploy/'))
+});
+
+gulp.task('requirejsBuild', function () {
+    rjs({
+        baseUrl: 'js',
+        out: 'build.js',
+        paths: {
+            Underscore: 'vendor/underscore/underscore',
+            Snap: 'vendor/snap.svg/dist/snap.svg'
+        },
+        name: "app",
+        shim: {
+            Underscore: {
+                exports: '_'
+            },
+            Snap: {
+                exports: 'Snap'
+            }
+        }
+    }).pipe(uglify({outSourceMap: true,preserveComments:'some'}))
+        .pipe(gulp.dest('./deploy/')); // pipe it to the output DIR
+});
+
+/*gulp.task('css', function () {
+ gulp.src(path)
+ .pipe(stylus())
+ .pipe(prefix("last 2 Chrome versions"))
+ .pipe(gulp.dest(dest))
+ });
+ gulp.task('watch', function() {
+ gulp.watch(path, ['css']);
+ });*/
+
+
+gulp.task('default', ['requirejsBuild','minify-css']);

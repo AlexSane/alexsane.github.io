@@ -1,0 +1,8 @@
+CACHE MANIFEST
+# rev 2
+CACHE:
+js/vendor/requirejs/require.js
+deploy/build.js
+deploy/style.css
+NETWORK:
+*
