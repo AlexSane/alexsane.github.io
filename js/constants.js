@@ -49,7 +49,7 @@ define(['functions'], function(f){
 
     };
 
-    var center = c.size/4 + (c.size*Math.sqrt(3)/2)*4;
+    var center = (c.size*Math.sqrt(3)/2)*4 - c.size/8 ;
     c.center = {
         x: center,
         y: center
