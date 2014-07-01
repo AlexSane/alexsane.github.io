@@ -11,7 +11,12 @@
 .paper {
 	display: inline-block;
 }
-
+.addthis_native_toolbox {
+    text-align: center;
+}
+.addthis_native_toolbox > div{
+    display: inline-block !important;
+}
 .paper, .paper > svg {
     width: 100%;
     height: 100%;
