@@ -30,10 +30,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
     drawLogo();
 
-
-
-
-
+    snap.node.querySelectorAll('desc')[0].textContent += ". Targetprocess © 2014";
 
     function drawLogo(){
         var seed = input.value || 0;
