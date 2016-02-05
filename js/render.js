@@ -36,7 +36,7 @@ define(['Underscore', 'Snap', 'constants', 'functions'], function(_, Snap, c, f)
                     }
                 );
             }, this);
-        //    this.renderPoints(paper);
+            //this.renderPoints(paper);
         }
 
 

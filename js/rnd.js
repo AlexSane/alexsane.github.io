@@ -9,6 +9,10 @@ define([],function(){
     }
     RND.prototype.nextInt = function() {
         this.state = (this.a * this.state + this.c) % this.m;
+        if (this.state < 0)
+        {
+            this.state = -this.state;
+        }
         return this.state;
     };
     RND.prototype.nextFloat = function() {
@@ -20,7 +24,8 @@ define([],function(){
         // can't modulu nextInt because of weak randomness in lower bits
         var rangeSize = end - start;
         var randomUnder1 = this.nextInt() / this.m;
-        return start + Math.floor(randomUnder1 * rangeSize);
+        var result = start + Math.floor(randomUnder1 * rangeSize);
+        return result >= end ? end : result;
     };
     RND.prototype.choice = function(array) {
         return array[this.nextRange(0, array.length)];

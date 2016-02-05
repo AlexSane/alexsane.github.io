@@ -1,8 +1,8 @@
-define(['Underscore', 'constants'], function(_, c){
+define(['Underscore', 'constants'], function (_, c) {
     var TAU = 2 * Math.PI;
 
     return {
-        hexPoints: function(center, radius){
+        hexPoints: function (center, radius) {
             var result = [];
             for (var i = 0; i < 6; i++) {
                 var x = radius * Math.sin(TAU * i / 6) + center.x;
@@ -14,8 +14,8 @@ define(['Underscore', 'constants'], function(_, c){
             return result;
         },
 
-        flatten: function(points){
-            return _.reduce(points, function(memo, n){
+        flatten: function (points) {
+            return _.reduce(points, function (memo, n) {
                 memo.push(n.x);
                 memo.push(n.y);
                 return memo;
@@ -23,26 +23,26 @@ define(['Underscore', 'constants'], function(_, c){
         },
 
 
-        distance: function(a, b){
+        distance: function (a, b) {
             return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
         },
 
-        angle: function(a, b){
+        angle: function (a, b) {
             var x = a.x - b.x;
             var y = a.y - b.y;
-            return Math.atan2(x,y);
+            return Math.atan2(x, y);
         },
 
-        random: function(arr){
+        random: function (arr) {
             return window.rnd.choice(arr);
         },
 
-        intersect: function(a,b,c,d){
+        intersect: function (a, b, c, d) {
 
-            function intersects(a,b,c,d,p,q,r,s) {
+            function intersects(a, b, c, d, p, q, r, s) {
                 var det, gamma, lambda;
                 det = (c - a) * (s - q) - (r - p) * (d - b);
-                if (Math.abs(det) <0.0005) {
+                if (Math.abs(det) < 0.0005) {
                     return false;
                 } else {
                     lambda = ((s - q) * (r - a) + (p - r) * (s - b)) / det;
@@ -52,7 +52,17 @@ define(['Underscore', 'constants'], function(_, c){
             }
 
             return intersects(a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
-        }
+        },
 
+        hashCode: function (str) {
+            var hash = 0;
+            if (this.length == 0) return hash;
+            for (var i = 0; i < str.length; i++) {
+                var c = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + c;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash;
+        }
     }
 });

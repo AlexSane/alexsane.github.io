@@ -7,14 +7,14 @@ var gulp = require('gulp'),
 var batch = require('gulp-batch');
 
 
-gulp.task('minify-css', function() {
+gulp.task('minify-css', function () {
     gulp.src('./css/style.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest('./deploy/'))
 });
-gulp.task('require', function(){
+gulp.task('require', function () {
     gulp.src('./js/vendor/requirejs/require.js')
-        .pipe(uglify({preserveComments:'some'}))
+        .pipe(uglify({preserveComments: 'some'}))
         .pipe(gulp.dest('./deploy/'))
 });
 gulp.task('requirejsBuild', function () {
@@ -35,7 +35,7 @@ gulp.task('requirejsBuild', function () {
             }
         }
     })
-        .pipe(uglify({preserveComments:'some'}))
+        .pipe(uglify({preserveComments: 'some'}))
         .pipe(gulp.dest('./deploy/')); // pipe it to the output DIR
 });
 
@@ -50,7 +50,7 @@ gulp.task('requirejsBuild', function () {
  });*/
 
 
-gulp.task('default', ['requirejsBuild','minify-css','require']);
+gulp.task('default', ['requirejsBuild', 'minify-css', 'require']);
 
 gulp.task('watch', function () {
     watch('js/**/*.js', batch(function (events, done) {
