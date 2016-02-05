@@ -1,7 +1,11 @@
 var gulp = require('gulp'),
     rjs = require('gulp-requirejs'),
     uglify = require('gulp-uglify'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    watch = require('gulp-watch');
+
+var batch = require('gulp-batch');
+
 
 gulp.task('minify-css', function() {
     gulp.src('./css/style.css')
@@ -30,7 +34,8 @@ gulp.task('requirejsBuild', function () {
                 exports: 'Snap'
             }
         }
-    }).pipe(uglify({preserveComments:'some'}))
+    })
+        .pipe(uglify({preserveComments:'some'}))
         .pipe(gulp.dest('./deploy/')); // pipe it to the output DIR
 });
 
@@ -46,3 +51,9 @@ gulp.task('requirejsBuild', function () {
 
 
 gulp.task('default', ['requirejsBuild','minify-css','require']);
+
+gulp.task('watch', function () {
+    watch('js/**/*.js', batch(function (events, done) {
+        gulp.start('default', done);
+    }));
+});

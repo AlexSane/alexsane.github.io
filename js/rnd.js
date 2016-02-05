@@ -5,7 +5,7 @@ define([],function(){
         this.a = 1103515245;
         this.c = 12345;
 
-        this.state = seed ? seed : Math.floor(Math.random() * (this.m-1));
+        this.state = seed;
     }
     RND.prototype.nextInt = function() {
         this.state = (this.a * this.state + this.c) % this.m;

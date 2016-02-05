@@ -30,9 +30,9 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
     drawLogo();
 
-    snap.node.querySelectorAll('desc')[0].textContent += ". Targetprocess © 2014";
+    snap.node.querySelectorAll('desc')[0].textContent += ". Targetprocess © 2014-2016";
 
-    function drawLogo(){
+    function drawLogo() {
         var seed = input.value || 0;
         window.rnd = new RND(seed);
 
@@ -90,7 +90,7 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
         function generateBobs(generateBobsSvg){
 
-            var points = [];
+
             var localColors = [];
             function color(){
                 if (localColors.length == 0) {
@@ -103,26 +103,41 @@ require(['Underscore', 'Snap', 'render', 'constants', 'functions', 'rnd', 'makeS
 
             function intersect(bob, bobs){
                 return _.any(bobs, function(anotherBob){
-                    var bobPoints = c.index2points([bob.s, bob.f, anotherBob.s, anotherBob.f]);
+                    var bobPoints = c.index2points([bob.s, bob.f, anotherBob.s||anotherBob.sc, anotherBob.f||anotherBob.fc]);
                     return f.intersect(bobPoints[0], bobPoints[1], bobPoints[2], bobPoints[3]);
                 });
             }
 
-            var localBobs = [];
-
-            for (var i = 0; i < 3; i++) {
+            var occupiedPoints = [];
+            var bobs = [];
+            for(var i=0;i<3;i++){
+                var sc;
+                var fc;
+                var counter=0;
                 do {
-                    var sc = f.random(startPoints);
-                    var fc = f.random(startPoints);
-                } while (points[sc] || points[fc] || sc == fc || intersect({s: sc, f: fc}, localBobs));
+                    var bobString = f.random(_.keys(c.allowed));
+                    var bobCoords = _.map(bobString.split('-'), function(s){return parseInt(s,10);});
+                    sc = bobCoords[0];
+                    fc = bobCoords[1];
+                    if (counter++ > 1000){
+                        throw new Error('bug');
+                    }
+                }while(
+                occupiedPoints[sc] ||
+                occupiedPoints[fc] ||
+                intersect({s:sc,f:fc}, bobs) ||
+                    _.any(c.allowed[bobString], function(p){return occupiedPoints[p]}));
 
-                points[sc] = true;
-                points[fc] = true;
+                bobs.push({sc:sc,fc:fc});
+                occupiedPoints[sc]=true;
+                occupiedPoints[fc]=true;
+                _.each(c.allowed[bobString], function(p){occupiedPoints[p]=true;});
+            }
 
-
+            var localBobs = [];
+            for(i=0;i<3;i++) {
                 for(var j=0;j<3;j++) {
-
-                    var bob = {s: symmetryGroups[sc][j], f: symmetryGroups[fc][j], color: color()};
+                    var bob = {s: symmetryGroups[bobs[i].sc][j], f: symmetryGroups[bobs[i].fc][j], color: color()};
                     if (generateBobsSvg) {
                         bob.svg = render.renderBob(snap, bob.s, bob.f, bob.color);
                     }
